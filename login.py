@@ -4,6 +4,8 @@ import password
 from login_connection import *
 import fo_ablak
 
+background_color = "#2a202e"
+
 
 def belepes_ablak():
     def ok_gomb_kezelese():
@@ -23,18 +25,21 @@ def belepes_ablak():
 
     belepes = Tk()
     belepes.title("Belépés")
+    belepes.configure(bg=background_color)
 
-    felh_nev_cimke = Label(belepes, text="Felhasználó neve (email):")
-    felh_jelszo_cimke = Label(belepes, text="Jelszó:")
+    felh_nev_cimke = Label(belepes, text="Felhasználónév:", bg=background_color, fg="white",
+                           font=("TkMenuFont", 10))
+    felh_jelszo_cimke = Label(belepes, text="Jelszó:", bg=background_color, fg="white",
+                              font=("TkMenuFont", 10))
 
     fhsz = StringVar()
     fhsz.set("")
-    felh_nev = Entry(belepes, textvariable=fhsz, width=30)
+    felh_nev = Entry(belepes, textvariable=fhsz, width=25)
     fjsz = StringVar()
     fjsz.set("")
-    felh_jelszo = Entry(belepes, textvariable=fjsz, width=20)
+    felh_jelszo = Entry(belepes, textvariable=fjsz, width=25, show="*")
 
-    gomb_ok = Button(belepes, text="OK", command=ok_gomb_kezelese, width=10)
+    gomb_ok = Button(belepes, text="Belépés", command=ok_gomb_kezelese, width=10)
     gomb_reg = Button(belepes, text="Regisztráció", command=reg_gomb_kezelese)
 
     felh_nev_cimke.grid(row=0, column=0, pady=20, padx=10, sticky=E)
@@ -65,27 +70,36 @@ def reg_ablak():
         jsz2.set(pw.jelszo)
         # regisztracio.destroy()
 
+    def visszalepes():
+        regisztracio.destroy()
+        belepes_ablak()
+
     regisztracio = Tk()
     regisztracio.title("Regisztráció")
+    regisztracio.configure(bg=background_color)
 
     pw = password.Jelszo()
 
-    felh_nev_cimke = Label(regisztracio, text="Felhasználó neve (email):")
-    felh_jelszo_cimke = Label(regisztracio, text="Jelszó:")
-    felh_jelszo_ismet_cimke = Label(regisztracio, text="Jelszó ismét:")
+    felh_nev_cimke = Label(regisztracio, text="Felhasználónév:", bg=background_color, fg="white",
+                           font=("TkMenuFont", 10))
+    felh_jelszo_cimke = Label(regisztracio, text="Jelszó:", bg=background_color, fg="white",
+                           font=("TkMenuFont", 10))
+    felh_jelszo_ismet_cimke = Label(regisztracio, text="Jelszó ismét:", bg=background_color, fg="white",
+                           font=("TkMenuFont", 10))
 
     fhnev = StringVar()
     fhnev.set("")
 
-    felh_nev = Entry(regisztracio, textvariable=fhnev, width=30)
+    felh_nev = Entry(regisztracio, textvariable=fhnev, width=25)
     jsz = StringVar()
     # jsz.set("")
-    felh_jelszo = Entry(regisztracio, textvariable=jsz, width=20)
+    felh_jelszo = Entry(regisztracio, textvariable=jsz, width=25)
     jsz2 = StringVar()
-    felh_jelszo_ismet = Entry(regisztracio, textvariable=jsz2, width=20)
+    felh_jelszo_ismet = Entry(regisztracio, textvariable=jsz2, width=25)
 
-    gomb_ok = Button(regisztracio, text="OK", command=ok_gomb_kezelese, width=10)
+    gomb_ok = Button(regisztracio, text="Regisztrálás", command=ok_gomb_kezelese, width=10)
     gomb_jelszo_gen = Button(regisztracio, text="Jelszó generálás", command=jelszo_gen_gomb_kezelese)
+    vissza_gomb = Button(regisztracio, text="Vissza a belépéshez", command=visszalepes, width=14)
 
     felh_nev_cimke.grid(row=0, column=0, pady=20, padx=10, sticky=E)
     felh_jelszo_cimke.grid(row=1, column=0, padx=10, sticky=E)
@@ -95,6 +109,7 @@ def reg_ablak():
     felh_jelszo_ismet.grid(row=2, column=1, padx=10, sticky=W)
     gomb_ok.grid(row=3, column=1, pady=20)
     gomb_jelszo_gen.grid(row=1, column=2)
+    vissza_gomb.grid(row=3, column=0)
 
     regisztracio.mainloop()
 

@@ -1,30 +1,30 @@
 import tkinter
 from tkinter import ttk
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 import sqlite3
 from tkinter import messagebox
+import record_class
 
 
 def order_manager_ablak():
+    records = []
     current_ID = None
     orders = None
     background_color = "#2a202e"
     root = tkinter.Tk()
-    root.title("Order Manager")
-    root.geometry("700x500")
+    root.title("Rendelés adatbázis")
+    root.geometry("700x470")
     root.resizable(False, False)
     root.configure(bg=background_color)
 
     kapcsolat = sqlite3.connect("DB/orders.db")
     ab = kapcsolat.cursor()
 
-
     def on_closing():
-        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        if messagebox.askokcancel("Kilépés", "Biztos, hogy ki szeretne lépni?"):
             root.destroy()
             ab.close()
             kapcsolat.close()
-
 
     root.protocol("WM_DELETE_WINDOW", on_closing)
 
@@ -34,19 +34,23 @@ def order_manager_ablak():
     item_string = tkinter.StringVar()
     amount_string = tkinter.StringVar()
 
-
     def refresh_treeview():
-        global current_ID, orders
+        global current_ID, orders, records
+        records = []
         ab.execute("SELECT * FROM orders")
         orders = ab.fetchall()
         db_treeview.delete(*db_treeview.get_children())
         count = 0
         for record in orders:
-            db_treeview.insert(parent='', index='end', iid=count, text="", values=(record[0], record[1],
-                                                                                   record[2], record[3], record[4]))
+            records.append(record_class.Record(record[0], record[1], record[2], record[3], record[4]))
+            records[count].print_to_console()
+            db_treeview.insert(parent='', index='end', iid=count, text="", values=(records[count].ID,
+                                                                                   records[count].nev,
+                                                                                   records[count].cim,
+                                                                                   records[count].rendelt_targy,
+                                                                                   records[count].mennyiseg))
             count += 1
         current_ID = orders[count-1][0]
-
 
     def add_order():
         global current_ID
@@ -63,13 +67,11 @@ def order_manager_ablak():
         refresh_treeview()
         ID_string.set(current_ID)
 
-
     def remove_order():
         print("DELETE FROM orders WHERE orderID = ?", (ID_string.get()))
         ab.execute("DELETE FROM orders WHERE orderID = ?", (ID_string.get(),))
         kapcsolat.commit()
         refresh_treeview()
-
 
     def update_order():
         print("UPDATE orders SET name = ?, address = ?, product = ?, amount = ? WHERE orderID = ?", (name_string.get(),
@@ -86,7 +88,6 @@ def order_manager_ablak():
         kapcsolat.commit()
         refresh_treeview()
 
-
     img = (Image.open("Assets/truck.jpg"))
     resized_image = img.resize((335,180))
     photo = ImageTk.PhotoImage(resized_image)
@@ -95,7 +96,7 @@ def order_manager_ablak():
     logo.image = photo
     logo.grid(row=0, column=2, rowspan=5, columnspan=4)
 
-    focim = tkinter.Label(root, text="Order Manager", bg=background_color, fg="white", font=("TkMenuFont", 14))
+    focim = tkinter.Label(root, text="Rendeléskezelő", bg=background_color, fg="white", font=("TkMenuFont", 14))
     focim.grid(row=0, column=0, sticky="w", pady=10, padx=10)
     idLabel = tkinter.Label(root, text="ID:", bg=background_color, fg="white", font=("TkMenuFont", 10))
     idLabel.grid(row=1, column=0, sticky="w", pady=5, padx=30)
@@ -131,11 +132,11 @@ def order_manager_ablak():
     db_treeview.column("Amount", anchor="w", width=75)
 
     db_treeview.heading("#0", text="", anchor="w")
-    db_treeview.heading("Order ID", text="Order ID", anchor="w")
-    db_treeview.heading("Name", text="Name", anchor="w")
-    db_treeview.heading("Address", text="Address", anchor="w")
-    db_treeview.heading("Item", text="Item", anchor="w")
-    db_treeview.heading("Amount", text="Amount", anchor="w")
+    db_treeview.heading("Order ID", text="ID", anchor="w")
+    db_treeview.heading("Name", text="Név", anchor="w")
+    db_treeview.heading("Address", text="Lakcím", anchor="w")
+    db_treeview.heading("Item", text="Rendelt tárgy", anchor="w")
+    db_treeview.heading("Amount", text="Mennyiség", anchor="w")
 
     style = ttk.Style(root)
     style.theme_use("clam")
@@ -152,6 +153,5 @@ def order_manager_ablak():
     button_update.grid(row=5, column=3)
     button_remove = tkinter.Button(root, text="Törlés", command=remove_order, width=10)
     button_remove.grid(row=5, column=4)
-
 
     root.mainloop()
