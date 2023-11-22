@@ -69,8 +69,10 @@ ab_jelszokeres(...): A megadott paraméterek alapján visszakeresi, hogy létezi
 
 ### password.py
 
-jelszo_generalasa(...)
+jelszo_generalasa(...): A megadott paraméterek alapján generál egy véletlenszerű jelszót, majd ezt visszatérési értékként visszaadja.  
+  
 
 ### record_class.py
 
-print_to_console(...)
+print_to_console(...): Teszteléshez használt függvény. Konzolra kiírja a meghívott rekord objektum változóinak értékeit.  
+  
