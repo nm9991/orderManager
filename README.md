@@ -58,10 +58,14 @@ visszalepes(): A regisztráció ablakbeli visszalépés gomb lenyomásához rend
 
 ### login_connection.py
 
-ab_letrehoz()
-ab_rogzites(...)
-ab_bezar()
-ab_jelszokeres(...)
+ab_letrehoz(): Létrehozza a felhasználók adatait tartalmazó adatbázis táblát, de csak ha még nem létezik.  
+  
+ab_rogzites(...): A megadott paraméterek alapján a "felhasználók" adatbázis táblába rögzíti a paraméterként megadott felhasználónevet és a jelszót.  
+  
+ab_bezar(): Szétbontja az adatbázis kapcsolatot a beléptető információkat tartalmazó adatbázissal.  
+  
+ab_jelszokeres(...): A megadott paraméterek alapján visszakeresi, hogy létezik-e a paraméterként beadott felhasználó az adatbázisban.  
+  
 
 ### password.py
 
