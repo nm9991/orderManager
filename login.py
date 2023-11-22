@@ -8,7 +8,7 @@ background_color = "#2a202e"
 
 
 def belepes_ablak():
-    def ok_gomb_kezelese():
+    def belepes_gomb_kezelese():
         if fhsz.get() == "" or fjsz.get() == "":
             messagebox.showerror("Hiba", "Nem lehet üres egyik mező sem!")
         else:
@@ -39,7 +39,7 @@ def belepes_ablak():
     fjsz.set("")
     felh_jelszo = Entry(belepes, textvariable=fjsz, width=25, show="*")
 
-    gomb_ok = Button(belepes, text="Belépés", command=ok_gomb_kezelese, width=10)
+    gomb_ok = Button(belepes, text="Belépés", command=belepes_gomb_kezelese, width=10)
     gomb_reg = Button(belepes, text="Regisztráció", command=reg_gomb_kezelese)
 
     felh_nev_cimke.grid(row=0, column=0, pady=20, padx=10, sticky=E)
@@ -53,11 +53,13 @@ def belepes_ablak():
 
 
 def reg_ablak():
-    def ok_gomb_kezelese():
+    def registration_gomb_kezelese():
         if jsz.get() != jsz2.get():
             messagebox.showerror("Hiba", "Nem egyforma a két beírt jelszó!")
         elif jsz.get() == "" or jsz2.get() == "" or fhnev.get() == "":
             messagebox.showerror("Hiba", "Nem lehet üres mező az ablakban!")
+        elif ab_dupla_felhasznalo(fhnev.get()):
+            messagebox.showerror("Hiba", "Ez a felhasználónév már létezik!")
         else:
             ab_rogzites(fhnev.get(), jsz.get())
             regisztracio.destroy()
@@ -97,7 +99,7 @@ def reg_ablak():
     jsz2 = StringVar()
     felh_jelszo_ismet = Entry(regisztracio, textvariable=jsz2, width=25)
 
-    gomb_ok = Button(regisztracio, text="Regisztrálás", command=ok_gomb_kezelese, width=10)
+    gomb_ok = Button(regisztracio, text="Regisztrálás", command=registration_gomb_kezelese, width=10)
     gomb_jelszo_gen = Button(regisztracio, text="Jelszó generálás", command=jelszo_gen_gomb_kezelese)
     vissza_gomb = Button(regisztracio, text="Vissza a belépéshez", command=visszalepes, width=14)
 

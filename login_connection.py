@@ -31,3 +31,13 @@ def ab_jelszokeres(email, jelszo_input):
         if rekord[0] == email:
             jelszo = rekord[1]
     return jelszo
+
+
+def ab_dupla_felhasznalo(felh):
+    ab.execute("SELECT * FROM felhasznalok WHERE email = ?", (felh,))
+    talalat = ab.fetchall()
+    for record in talalat:
+        if record[0] == felh:
+            return True
+        else:
+            return False

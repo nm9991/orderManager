@@ -1,18 +1,8 @@
-class Felhasznalo:
-    pass
-
-
 class Jelszo:
     jelszo = 'sf'
 
     def __init__(self):
         self.jelszo_generalasa()
-
-    def jelszo_bekerese(self):
-        pass
-
-    def jelszo_ellenorzese(self):
-        pass
 
     def jelszo_generalasa(self, hany_betu_legyen = 10, kisbetu_bool = True, nagybetu_bool = True, szam_bool = True):
         import string
