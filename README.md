@@ -66,7 +66,7 @@ ab_bezar(): Szétbontja az adatbázis kapcsolatot a beléptető információkat 
   
 ab_jelszokeres(...): A megadott paraméterek alapján visszakeresi, hogy létezik-e a paraméterként beadott felhasználó az adatbázisban.  
   
-ab_dupla_felhasznalo(felh): Megnézi, hogy a paraméterként megadott felhasználónév létezik-e már az adatbázisban.  
+ab_dupla_felhasznalo(felh): Megnézi, hogy a paraméterként megadott felhasználónév létezik-e már az adatbázisban. Ez alapján visszatérési értékként igazat vagy hamisat ad vissza.  
   
 
 ### password.py
