@@ -41,13 +41,20 @@ update_order(): A módosítás gomb lenyomásához rendelt függvény. Módosít
 
 ### login.py
 
-belepes_ablak()
-ok_gomb_kezelese()
-reg_gomb_kezelese()
-reg_ablak()
-ok_gomb_kezelese()
-jelszo_gen_gomb_kezelese()
-visszalepes()
+belepes_ablak(): A bejelentkező ablak megjelenítéséért, bejelentkezésért felelős függvény. Ezen felül átirányítást is biztosít a regisztráció ablakra.  
+  
+belepes_gomb_kezelese(): A belépés gomb lenyomásához rendelt függvény. Megnézi, hogy a beírt adatok alapján talál-e felhasználót az adatbázisban. Ennek megfelelően reagál.  
+  
+reg_gomb_kezelese(): A bejelentkező ablakbeli regisztráció gomb lenyomásához rendelt függvény. Átirányítja a felhasználót a regisztráció ablakra.  
+  
+reg_ablak(): A regisztráció ablak megjelenítéséért, regisztrációért felelős függvény. Ezen felül visszalépési lehetőséget is biztosít a belépés ablakra, továbbá jelszó generálást is biztosít.  
+  
+registration_gomb_kezelese(): A regisztráció ablakbeli regisztráció gomb lenyomásához rendelt függvény. A beírt adatok alapján regisztrál egy új felhasználót az adatbázisba.  
+  
+jelszo_gen_gomb_kezelese(): A regisztráció ablakbeli jelszó generáló gomb lenyomásához rendelt függvény. Generál egy 10 karakter hosszú véletlenszerű jelszót a jelszó mezőkbe.  
+  
+visszalepes(): A regisztráció ablakbeli visszalépés gomb lenyomásához rendelt függvény. Visszalépteti a felhasználót a bejelentkező ablakra.  
+  
 
 ### login_connection.py
 
