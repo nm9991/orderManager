@@ -26,12 +26,18 @@ Pillow
 
 ### fo_ablak.py
 
-order_manager_ablak()
-on_closing()
-refresh_treeview()
-add_order()
-remove_order()
-update_order()
+order_manager_ablak(): A főablak megjelenítéséért, adatainak tárolásáért, műveleteinek definiálásáért felelős függvény.  
+  
+on_closing(): Eseménykezelő függvény. Az ablak bezárásakor megkérdezi a felhasználót, hogy biztos bezárja-e a programot. Ha igen, akkor lezárja az adatbázis kommunikációt.  
+  
+refresh_treeview(): A grafikus felület frissítéséért felelős függvény. Induláskor és műveletek után fut le.  
+  
+add_order(): A hozzáadás gomb lenyomásához rendelt függvény. Hozzáad egy új rekordot az adatbázishoz a mezőkbe írt adatok alapján.  
+  
+remove_order(): A törlés gomb lenyomásához rendelt függvény. Kitörli a megadott ID-hez tartozó rekordot az adatbázisból.  
+  
+update_order(): A módosítás gomb lenyomásához rendelt függvény. Módosítja a megadott ID-hez tartozó rekordot a mezőkbe írt adatok alapján.  
+  
 
 ### login.py
 
